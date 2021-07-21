@@ -3,7 +3,6 @@ const multer = require("multer");
 const { storage } = require("../cloudinary");
 const upload = multer({ storage });
 
-const ExpressError = require("../utils/ExpressError");
 const catchAsync = require("../utils/catchAsync");
 const dogs = require("../controllers/dogCRUD");
 const Dogs = require("../models/dogModel");

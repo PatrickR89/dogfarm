@@ -8,7 +8,7 @@ const {
   messageSchema
 } = require("./validationSchema");
 
-const ExpressError = require("./utils/ExpressError");
+const ExpressError = require("./utils/expressError");
 
 module.exports.loggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
