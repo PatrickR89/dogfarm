@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:;base64,="> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merienda&family=Roboto:wght@300&display=swap" rel="stylesheet">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/homeStyle.css">
+    <title>Ishibu home</title>
+</head>
+<body>
+    <%- include('../partials/navbar')%>
+    <main class="container mt-5" >
+      <%-include('../partials/flash')%>
+      <%-include('../partials/offCanvasMenu')%>
+        <div class="row mb-3" style="justify-content:center;">
+          <% if(currentUser) { %>
+            <form action="/home/<%= home._id %>/edit" method="GET" style="justify-content: center; display: inline;" class="m-auto">
+                <button class="btn admin-btn btn-sm mb-3" style="width: 15%; justify-content: center; margin: auto;">EDIT</button>
+            </form>
+            <% } %> 
+            <div class="card col-6 mx-2 glass" style="width: 55%;">
+                <div class="card-body">
+                    <h5 class="card-title">About us</h5>
+                    <p class="card-text">  <%= home.aboutUs %> 
+                    </p>
+                    <a href="/aboutus" class="card-link astyle">More...</a>
+                   
+                </div>
+            </div>
+            <div class="card col-4 mx-2 glass" style="width: 40%;">
+                <% if (home.images.length) { %>
+                <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <% home.images.forEach((img, i)=> {%>
+                            <div class="carousel-item <%= i === 0 ? 'active' : ''%> " style="height: 30rem;">
+                                <img src="<%= img.url %>" class="d-block w-100" style="height: 100%; width: 100%; object-fit: contain;" alt="...">
+                            </div>
+                            <% }) %>
+                    </div>
+                    <% if(home.images.length > 1) {%>
+
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                    <% } %>
+                  </div>
+            </div>
+            <% } else { %>
+                <img class="img-fluid" src="https://res.cloudinary.com/dm85zedll/image/upload/v1624647772/DogFarm/kavrytmozb7l9l7uhjch.jpg" alt="...">
+            <% } %> 
+        
+        </div>
+        
+        <% for (let info of news.slice(news.length -5, news.length ).reverse()) { %>
+            
+            <%  var monthNames = [
+            'January', 'February', 'March',
+            'April', 'May', 'June', 'July',
+            'August', 'September', 'October',
+            'November', 'December'
+            ];
+            var d = info.date.getDate();
+            var m = monthNames[info.date.getMonth()];
+            var y = info.date.getFullYear();
+            %> 
+        
+            <div class="card mb-3 mx-3 glass">
+                <div class="row g-0">
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title"><a href="news/<%= info._id %>" class="astyle"> <%= info.title %></a></h5>
+                      <p class="card-text text-muted"> Created: <%= d+ `. ` +m+ `, ` +y %>  </p>
+                      <p class="limited-p card-text" >Content: <%= info.content %> </p>
+        
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+        <% } %> 
+   
+        
+
+    </main>
+    <%- include('../partials/footer')%>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</body>
+</html>

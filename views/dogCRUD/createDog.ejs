@@ -1,0 +1,122 @@
+<% layout ('layout/boilerplate') %>
+
+<div class="row">
+  <div class="col-8 offset-2">
+    <h3>Create a new dog profile</h3>
+    <form
+      action="/dogs"
+      method="POST"
+      enctype="multipart/form-data"
+      novalidate
+      class="needs-validation"
+    >
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        name="dog[name]"
+        id="name"
+        class="form-control editorial-div mb-3"
+        maxlength="50"
+        required
+      />
+
+      <label for="dateOfBirth" class="form-label">Date of birth</label>
+      <input
+        type="date"
+        name="dog[dateOfBirth]"
+        id="dateOfBirth"
+        class="form-control editorial-div mb-3"
+        required
+      />
+
+      <label for="parent1" class="form-label">Father's name</label>
+      <input
+        type="text"
+        name="dog[parent1]"
+        id="parent1"
+        class="form-control editorial-div mb-3"
+        list="fathers"
+        maxlength="50"
+        required
+      />
+      <datalist id="fathers">
+        <% for (parent of parents) {%>
+        <option><%= parent.name %></option>
+        <% } %>
+      </datalist>
+
+      <label for="parent2" class="form-label">Mother's name</label>
+      <input
+        type="text"
+        name="dog[parent2]"
+        id="parent2"
+        class="form-control editorial-div mb-3"
+        list="mothers"
+        maxlength="50"
+        required
+      />
+      <datalist id="mothers">
+        <% for (parent of parents) {%>
+        <option><%= parent.name %></option>
+        <% } %>
+      </datalist>
+
+      <label for="images" class="form-label"> Images: </label>
+      <input
+        class="form-control editorial-div mb-3"
+        type="file"
+        name="images"
+        id="images"
+        multiple
+      />
+
+      <label for="status" class="form-label"> Status </label>
+      <select
+        class="form-select editorial-div mb-3"
+        name="dog[status]"
+        aria-label="Default select example"
+        id="status"
+        required
+      >
+        <option value="On farm" id="On farm" name="statusOption">
+          On farm
+        </option>
+        <option value="Sold" id="Sold" name="statusOption">Sold</option>
+        <option value="Deceased" id="Deceased" name="statusOption">
+          Deceased
+        </option>
+      </select>
+      <div id="container"></div>
+
+      <label for="description" class="form-label">Description:</label>
+      <textarea
+        name="dog[description]"
+        id="description"
+        cols="30"
+        rows="10"
+        class="form-control mb-3 editorial-div"
+        maxlength="1500"
+        required
+      ></textarea>
+      <div class="row">
+        <button
+          class="btn admin-btn btn-sm mb-3"
+          style="width: 32%; justify-content: center; margin: auto"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+      <div class="row" style="justify-content: center">
+        <a
+          href="/dogs"
+          class="btn admin-btn btn-sm mb-3"
+          style="width: 20%; justify-content: center; margin: auto"
+          >Back to index</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/javascripts/dogDeathyear.js"></script>

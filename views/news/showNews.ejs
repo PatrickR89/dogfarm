@@ -1,0 +1,143 @@
+<% layout ('layout/boilerplate') %> <% var monthNames = [ 'January', 'February',
+'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+'November', 'December' ]; var d = news.date.getDate(); var m =
+monthNames[news.date.getMonth()]; var y = news.date.getFullYear(); %>
+
+<div class="row">
+  <h1>News</h1>
+  <div class="card mb-3 show-div" style="width: 100%">
+    <div class="row g-0">
+      <div class="col-md-4 my-3">
+        <% if (news.images.length) { %>
+        <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner" style="align-items: flex-start">
+            <% news.images.forEach((img, i)=> {%>
+            <div
+              class="carousel-item <%= i === 0 ? 'active' : ''%>"
+              style="height: 30rem"
+            >
+              <img
+                src="<%= img.url %>"
+                class="d-block w-100"
+                style="height: 100%; width: auto; object-fit: contain"
+                alt="..."
+              />
+            </div>
+            <% }) %>
+          </div>
+          <% if(news.images.length > 1) {%>
+
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#newsCarousel"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#newsCarousel"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+          <% } %>
+        </div>
+
+        <% } else { %>
+        <img
+          class="img-fluid"
+          src="https://res.cloudinary.com/dm85zedll/image/upload/v1624647772/DogFarm/kavrytmozb7l9l7uhjch.jpg"
+          alt="..."
+        />
+        <% } %>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= news.title %></h5>
+          <p class="card-text"><%= news.content %></p>
+          <p class="card-text">
+            <small class="text-muted"
+              >Created: <%= d %>. <%= m %>, <%= y %>
+            </small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if(currentUser) { %>
+  <div>
+    <form
+      action="/news"
+      method="GET"
+      style="justify-content: center; display: inline"
+    >
+      <button
+        class="btn index-btn btn-sm mb-3"
+        style="width: 33%; justify-content: center"
+      >
+        INDEX
+      </button>
+    </form>
+    <form
+      action="/news/<%= news._id %>/edit"
+      method="GET"
+      style="justify-content: center; display: inline"
+    >
+      <button
+        class="btn admin-btn btn-sm mb-3"
+        style="width: 33%; justify-content: center"
+      >
+        EDIT
+      </button>
+    </form>
+    <form
+      action="/news/<%= news._id %>?_method=DELETE"
+      method="POST"
+      style="justify-content: center; display: inline"
+    >
+      <button
+        class="btn admin-btn btn-sm mb-3"
+        style="width: 33%; justify-content: center"
+      >
+        DELETE
+      </button>
+    </form>
+    <% } else { %>
+    <form
+      action="/news"
+      method="GET"
+      style="justify-content: center; display: inline"
+    >
+      <button
+        class="btn index-btn btn-sm mb-3"
+        style="width: 100%; justify-content: center"
+      >
+        INDEX
+      </button>
+    </form>
+    <% } %>
+  </div>
+  <% if (news.images.length) { %>
+  <div class="card mb-3 gallery-div px-0" style="width: 100%">
+    <h4 class="card-title mt-3 mx-3">Gallery</h4>
+    <div class="row">
+      <div class="col ms-3 mb-3">
+        <% for (let image of news.images) {%>
+        <a href="<%= image.url %>">
+          <img
+            src="<%= image.thumbnail %>"
+            class="img-fluid rounded gallery-thumb"
+            alt=""
+          />
+        </a>
+        <% } %>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>

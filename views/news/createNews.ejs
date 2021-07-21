@@ -1,0 +1,60 @@
+<% layout ('layout/boilerplate') %>
+
+<div class="row">
+  <h3 class="text-centered">Create new news</h3>
+  <div class="col-8 offset-2">
+    <form
+      action="/news"
+      enctype="multipart/form-data"
+      novalidate
+      class="needs-validation"
+      method="POST"
+    >
+      <label for="title" class="form-label">Title:</label>
+      <input
+        type="text"
+        name="news[title]"
+        id="title"
+        class="form-control editorial-div mb-3"
+        maxlength="50"
+        required
+      />
+
+      <label for="content" class="form-label">News text:</label>
+      <textarea
+        name="news[content]"
+        id="content"
+        cols="30"
+        rows="10"
+        class="form-control editorial-div mb-3"
+      >
+Enter news content here...</textarea
+      >
+
+      <label for="images" class="form-label"> Images: </label>
+      <input
+        class="form-control mb-3 editorial-div mb-3"
+        type="file"
+        name="images"
+        id="images"
+        multiple
+      />
+
+      <button
+        class="btn admin-btn btn-sm mb-3"
+        style="width: 33%; margin: auto; display: block"
+        type="submit"
+      >
+        Submit
+      </button>
+      <div class="row" style="justify-content: center">
+        <a
+          href="/news"
+          class="btn admin-btn btn-sm mb-3"
+          style="width: 20%; justify-content: center; margin: auto"
+          >Index</a
+        >
+      </div>
+    </form>
+  </div>
+</div>

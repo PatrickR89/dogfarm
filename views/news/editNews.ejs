@@ -1,0 +1,80 @@
+<% layout ('layout/boilerplate') %>
+
+<div class="row">
+  <h3 class="text-centered">Edit news</h3>
+  <div class="col-8 offset-2">
+    <form
+      action="/news/<%= news._id %>?_method=put"
+      enctype="multipart/form-data"
+      novalidate
+      class="needs-validation"
+      method="POST"
+    >
+      <label for="title" class="form-label">Title:</label>
+      <input
+        type="text"
+        name="news[title]"
+        id="title"
+        class="form-control editorial-div mb-3"
+        maxlength="50"
+        value="<%= news.title %>"
+        required
+      />
+
+      <label for="content" class="form-label">Content:</label>
+      <textarea
+        name="news[content]"
+        id="content"
+        cols="30"
+        rows="10"
+        class="form-control editorial-div mb-3"
+      >
+ <%= news.content %>  </textarea
+      >
+
+      <label for="images" class="form-label"> Images: </label>
+      <input
+        class="form-control mb-3 editorial-div mb-3"
+        type="file"
+        name="images"
+        id="images"
+        multiple
+      />
+
+      <div class="mb-3">
+        <h5>Choose images to delete:</h5>
+        <% news.images.forEach(function(img, i) { %>
+        <div class="mb-3 img-delete">
+          <input
+            type="checkbox"
+            id="image<%=i%>"
+            name="deleteImages[]"
+            value="<%=img.filename%>"
+            style="display: none"
+          />
+
+          <label for="image<%=i%>" class="del-label"
+            ><img src="<%= img.thumbnail %>" alt=""
+          /></label>
+        </div>
+        <% }) %>
+      </div>
+
+      <button
+        class="btn admin-btn btn-sm mb-3"
+        style="width: 33%; margin: auto; display: block"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+    <form action="/news/<%= news._id %>" method="GET">
+      <button
+        class="btn admin-btn btn-sm mb-3"
+        style="width: 20%; margin: auto; display: block"
+      >
+        Back
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<% layout ('layout/boilerplate') %>
+
+<h1>Messages:</h1>
+
+<form
+  action="/contact"
+  method="GET"
+  style="justify-content: center; display: inline"
+>
+  <button
+    class="btn index-btn btn-sm mb-3"
+    style="width: 32%; justify-content: center; margin: auto"
+  >
+    Back to contact
+  </button>
+</form>
+
+<% for (let message of messages.reverse()) {%>
+<div class="row">
+  <div class="col-8">
+    <div class="card mb-3 p-3 index-div">
+      <h3 class="card-title"><%= message.name %></h3>
+      <p class="card-text">Email: <%= message.email %></p>
+      <p class="card-text">Message: <%= message.message %></p>
+    </div>
+    <% if(currentUser) { %>
+    <form
+      action="/contact/messages/<%= message._id %>?_method=DELETE"
+      method="POST"
+      style="justify-content: center; display: inline"
+    >
+      <button
+        class="btn admin-btn btn-sm mb-3"
+        style="width: 32%; justify-content: center; margin: auto"
+      >
+        DELETE
+      </button>
+    </form>
+    <% } %>
+  </div>
+</div>
+<% } %>

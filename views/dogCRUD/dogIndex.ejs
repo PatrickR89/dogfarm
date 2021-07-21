@@ -1,0 +1,41 @@
+<% layout ('layout/boilerplate') %>
+
+<h1 class="mb-3">Dogs index</h1>
+
+<% for (let dog of dogs) { %> <% var monthNames = [ 'January', 'February',
+'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+'November', 'December' ]; var d = dog.dateOfBirth.getDate(); var m =
+monthNames[dog.dateOfBirth.getMonth()]; var y = dog.dateOfBirth.getFullYear();
+%>
+<a href="dogs/<%= dog._id %>" class="a-index">
+  <div class="card mb-3 index-div">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <% if (dog.images.length) { %>
+        <img
+          class="img-fluid"
+          src="<%= dog.images[0].url %>"
+          style="min-height: 200px"
+          alt="..."
+        />
+        <% } else { %>
+        <img
+          class="img-fluid"
+          src="https://res.cloudinary.com/dm85zedll/image/upload/v1624647772/DogFarm/kavrytmozb7l9l7uhjch.jpg"
+          alt="..."
+        />
+        <% } %>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h4 class="card-title"><%= dog.name %></h4>
+          <p class="card-text text-muted">
+            Date of birth: <%= d+ ` ` +m+ ` ` +y %>
+          </p>
+          <p class="card-text limited-p">Description: <%= dog.description %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+<% } %>

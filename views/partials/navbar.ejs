@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <style>
+      .nav-active {
+        color: hsl(0, 0%, 100%) !important;
+        font-weight: 500;
+      }
+    </style>
+
+    <nav
+      class="navbar sticky-top navbar-expand-lg navbar-dark"
+      style="background-color: hsl(69, 9%, 15%)"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/home">Ishibu Dog Farm</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse"
+          id="navbarNavAltMarkup"
+          name="navbarNavAltMarkup"
+        >
+          <div class="navbar-nav" name="navbarstat">
+            <a class="nav-link" href="/home">Home</a>
+            <a class="nav-link" href="/dogs">Dogs</a>
+            <a class="nav-link" href="/news">News</a>
+            <a class="nav-link" href="/competitions">Competitions</a>
+          </div>
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link" href="/aboutus">About Us</a>
+            <a class="nav-link" href="/contact">Contact</a>
+            <% if (! currentUser) {%>
+            <a href="/login" class="nav-link">Log In</a>
+            <% } else {%>
+            <a
+              class="nav-link"
+              data-bs-toggle="offcanvas"
+              href="#offcanvasNavigation"
+              role="button"
+              aria-controls="offcanvasNavigation"
+            >
+              Admin
+            </a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <script>
+      const path = window.location.pathname;
+
+      const navLinks = document.getElementsByClassName("nav-link");
+
+      for (let i = 0; i < navLinks.length; i++) {
+        if (navLinks.item(i).getAttribute("href") == path) {
+          navLinks.item(i).classList.add("nav-active");
+        }
+      }
+    </script>
+  </body>
+</html>

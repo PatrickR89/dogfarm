@@ -1,0 +1,41 @@
+<% layout ('layout/boilerplate') %>
+
+<h1>About us</h1>
+<% if(currentUser) { %>
+<form
+  action="/aboutus/<%=aboutUs._id %>/edit"
+  method="GET"
+  style="justify-content: center; display: inline"
+  class="m-auto"
+>
+  <button
+    class="btn admin-btn btn-sm mb-3"
+    style="width: 15%; justify-content: center; margin: auto"
+  >
+    EDIT
+  </button>
+</form>
+<% } %>
+
+<img src="<%= aboutUs.images[0].url %>" class="img-fluid mb-3" alt="..." />
+
+<div class="card mb-3 glass">
+  <h5 class="card-header"><%= aboutUs.field1Title %></h5>
+  <div class="card-body">
+    <p class="card-text"><%= aboutUs.field1 %></p>
+  </div>
+</div>
+
+<div class="card mb-3 glass">
+  <h5 class="card-header"><%= aboutUs.field2Title %></h5>
+  <div class="card-body">
+    <p class="card-text"><%= aboutUs.field2 %></p>
+  </div>
+</div>
+
+<div class="card mb-3 glass">
+  <h5 class="card-header"><%= aboutUs.field3Title %></h5>
+  <div class="card-body">
+    <p class="card-text"><%= aboutUs.field3 %></p>
+  </div>
+</div>

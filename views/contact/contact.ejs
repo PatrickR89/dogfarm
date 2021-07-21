@@ -1,0 +1,175 @@
+<% layout ('layout/boilerplate') %>
+
+<div class="row">
+  <h1>Contact</h1>
+  <% if(currentUser) { %>
+  <form
+    action="/contact/<%= contact._id %>/edit"
+    method="GET"
+    style="justify-content: center; display: inline"
+    class="m-auto"
+  >
+    <button
+      class="btn admin-btn btn-sm mb-3"
+      style="width: 15%; justify-content: center; margin: auto"
+    >
+      EDIT
+    </button>
+  </form>
+
+  <form
+    action="/contact/messages"
+    method="GET"
+    style="justify-content: center; display: inline"
+  >
+    <button
+      class="btn admin-btn btn-sm mb-3"
+      style="width: 15%; justify-content: center; margin: auto"
+    >
+      View messages
+    </button>
+  </form>
+  <% } %>
+  <div class="col-6 p-3">
+    <h3>Message us:</h3>
+    <form
+      action="/contact/messages"
+      method="POST"
+      novalidate
+      class="needs-validation"
+    >
+      <label for="name" class="form-label">Your name:</label>
+      <input
+        type="text"
+        name="message[name]"
+        id="name"
+        class="form-control editorial-div mb-3"
+        maxlength="50"
+        required
+      />
+      <label for="email" class="form-label">Your email:</label>
+      <input
+        type="text"
+        name="message[email]"
+        id="email"
+        class="form-control editorial-div mb-3"
+        maxlength="50"
+        required
+      />
+      <label for="message" class="form-label">Your message:</label>
+      <textarea
+        name="message[message]"
+        id="message"
+        cols="30"
+        rows="10"
+        class="form-control mb-3 editorial-div"
+        required
+      ></textarea>
+      <div class="row" style="justify-content: center">
+        <button
+          class="btn index-btn mb-3 btn-sm"
+          type="submit"
+          style="width: 30%; align-items: center"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="col-6 row p-3">
+    <div class="row align-items-center border rounded-pill m-3">
+      <div class="col-6 text-end">
+        <a
+          href="https://www.google.com/maps/place/<%= contact.street %>+<%= contact.streetNo %>+<%= contact.city %>"
+        >
+          <img
+            src="/icons/placeholder.png"
+            style="height: 2rem; width: 2rem"
+            alt=""
+          />
+        </a>
+      </div>
+      <div class="col-6">
+        <a
+          href="https://www.google.com/maps/place/<%= contact.street %>+<%= contact.streetNo %>+<%= contact.city %>"
+          style="text-decoration: none; color: black"
+        >
+          <%= contact.street %>, <%= contact.streetNo %>
+          <br />
+          <%= contact.city %>
+          <br />
+          <%= contact.country %>
+          <br />
+        </a>
+      </div>
+    </div>
+    <div
+      class="
+        row
+        justify-content-center
+        align-items-center
+        border
+        rounded-pill
+        p-2
+        m-3
+      "
+    >
+      <img
+        src="/icons/telephone.png"
+        style="height: 2rem; width: 3.5rem"
+        alt=""
+      />
+      +<%= contact.phone %>
+    </div>
+    <div
+      class="
+        row
+        justify-content-center
+        align-items-center
+        border
+        rounded-pill
+        p-2
+        m-3
+      "
+    >
+      <img src="/icons/email.png" style="height: 2rem; width: 3.5rem" alt="" />
+      <%= contact.email %>
+    </div>
+    <div
+      class="
+        row
+        justify-content-center
+        align-items-center
+        border
+        rounded-pill
+        p-2
+        m-3
+      "
+    >
+      <div class="col-4 text-center">
+        <a href="<%= contact.faceLink %>">
+          <img
+            src="/icons/facebook.png"
+            style="height: 2rem; width: 2rem"
+            alt=""
+        /></a>
+      </div>
+      <div class="col-4 text-center">
+        <a href="<%= contact.instaLink %>">
+          <img
+            src="/icons/instagram.png"
+            style="height: 2rem; width: 2rem"
+            alt=""
+        /></a>
+      </div>
+      <div class="col-4 text-center">
+        <a href="<%= contact.twittLink %>">
+          <img
+            src="/icons/twitter.png"
+            style="height: 2rem; width: 2rem"
+            alt=""
+        /></a>
+      </div>
+    </div>
+  </div>
+</div>

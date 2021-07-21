@@ -1,0 +1,228 @@
+body {
+  background-color: hsl(25, 8%, 81%);
+  font-family: "Roboto", sans-serif;
+}
+
+.main-style {
+  min-height: 79.5vh;
+}
+
+.index-div {
+  background-color: hsl(25, 8%, 70%);
+  transition: 0.5s;
+}
+
+.index-nozoom-div {
+  background-color: hsl(25, 8%, 70%);
+}
+
+.glass {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+}
+
+.card-text {
+  color: black;
+}
+
+.show-div {
+  background-color: hsl(25, 10%, 70%);
+  transition: 0.5s ease-in;
+}
+
+.editorial-div {
+  background-color: hsl(25, 10%, 90%);
+  transition: 0.5s ease-in;
+}
+
+.gallery-div {
+  background-color: hsl(25, 4%, 70%);
+}
+
+.gallery-thumb {
+  transition: 0.5s;
+}
+
+.gallery-thumb:hover {
+  transform: scale(1.2);
+}
+
+.index-div:hover {
+  transform: scale(1.05);
+}
+
+.a-index {
+  text-decoration: none;
+  color: hsl(25, 15%, 35%);
+}
+
+.index-title {
+  color: hsl(25, 15%, 35%);
+}
+
+.a-index:hover {
+  color: hsl(25, 15%, 20%);
+}
+
+.limited-p {
+  width: 80ch;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.img-index {
+  max-width: 100%;
+  height: 100%;
+}
+
+.admin-btn {
+  background-color: #764423;
+  color: #ced0c3;
+  border: none;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.admin-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  border-radius: 3px;
+
+  background-color: #c3b096;
+
+  transition: transform 0.5s ease-out;
+
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.admin-btn:hover::before,
+.admin-btn:active::before {
+  transform: scaleX(1);
+}
+
+.admin-btn {
+  z-index: 1;
+}
+
+.admin-btn:hover,
+.admin-btn:active {
+  color: #332a1d;
+}
+
+.index-btn {
+  background-color: #b16635;
+  color: #ced0c3;
+  border: none;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.index-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  border-radius: 3px;
+
+  background-color: #d69c76;
+
+  transition: transform 0.5s ease-out;
+
+  transform: scaleX(0);
+  transform-origin: center;
+}
+
+.index-btn:hover::before,
+.index-btn:active::before {
+  transform: scaleX(1);
+}
+
+.index-btn {
+  z-index: 1;
+}
+
+.index-btn:hover,
+.index-btn:active {
+  color: #332a1d;
+}
+
+.offc-btn {
+  background-color: #5b5e4a;
+  color: #f8eed3;
+}
+
+.offc-btn:hover {
+  background-color: hsl(69, 12%, 50%);
+}
+
+.img-delete {
+  display: inline-block;
+}
+
+.del-label {
+  padding: 10px;
+  display: block;
+  position: relative;
+  margin: 5px;
+  cursor: pointer;
+}
+.del-label:before {
+  content: "";
+  color: #fcf6e9;
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 28px;
+  transition-duration: 0.5s;
+  transform: scale(0);
+}
+
+.del-label img {
+  width: 200px;
+  height: auto;
+  transition-duration: 0.3s;
+  transform-origin: 50% 50%;
+}
+
+:checked + label {
+  border-color: inherit;
+}
+
+:checked + .del-label:before {
+  content: "🗑";
+  color: red;
+  transform: scale(2.5);
+}
+
+:checked + .del-label img {
+  transform: scale(0.8);
+  z-index: -1;
+}
+
+.on-farm {
+  color: #e29300;
+}
+
+.sold {
+  color: #93552c;
+}
+
+.deceased {
+  color: #62624a;
+}

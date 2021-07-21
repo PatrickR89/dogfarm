@@ -1,0 +1,87 @@
+<style>
+  .glass {
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+  }
+</style>
+
+<div
+  class="offcanvas offcanvas-start glass"
+  tabindex="-1"
+  id="offcanvasNavigation"
+  aria-labelledby="offcanvasNavigation"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasNavigation">Admin</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body glass">
+    <div class="dropdown mt-3">
+      <button
+        class="btn offc-btn dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+      >
+        Page navigation
+      </button>
+
+      <ul class="dropdown-menu offc-btn" aria-labelledby="dropdownMenuButton">
+        <li>
+          <a class="dropdown-item" href="/home">Home</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/dogs">Dogs</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/news">News</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/competitions">Competitions</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/aboutus">About Us</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+    <div class="dropdown mt-3">
+      <button
+        class="btn offc-btn dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+      >
+        New
+      </button>
+
+      <ul class="dropdown-menu offc-btn" aria-labelledby="dropdownMenuButton">
+        <li>
+          <a class="dropdown-item" href="/dogs/new">New Dog</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/news/new">New News</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/competitions/new">New Competition</a>
+        </li>
+      </ul>
+    </div>
+    <div class="mt-3">
+      <a href="/contact/messages" class="btn offc-btn">Recieved messages</a>
+    </div>
+    <div class="mt-3">
+      <a href="/register" class="btn offc-btn">Register new user</a>
+    </div>
+    <div class="mt-3">
+      <a href="/logout" class="btn admin-btn">Logout</a>
+    </div>
+  </div>
+</div>

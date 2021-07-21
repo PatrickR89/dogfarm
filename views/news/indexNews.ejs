@@ -1,0 +1,40 @@
+<% layout ('layout/boilerplate') %>
+
+<h1>News index</h1>
+
+<% for (let info of news.reverse()) { %> <% var monthNames = [ 'January',
+'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+'October', 'November', 'December' ]; var d = info.date.getDate(); var m =
+monthNames[info.date.getMonth()]; var y = info.date.getFullYear(); %>
+
+<div class="card mb-3 index-div shadow">
+  <a href="news/<%= info._id %>" class="a-index">
+    <div class="row g-0">
+      <div class="col-md-2" style="display: flex; justify-content: center">
+        <% if (info.images.length) { %>
+        <img
+          class="img-fluid img-index"
+          src="<%= info.images[0].url %>"
+          alt="..."
+        />
+        <% } else { %>
+        <img
+          class="img-fluid img-index"
+          src="https://res.cloudinary.com/dm85zedll/image/upload/v1624647772/DogFarm/kavrytmozb7l9l7uhjch.jpg"
+          alt="..."
+        />
+        <% } %>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h4 class="card-title"><%= info.title %></h4>
+          <p class="card-text text-muted">
+            Created: <%= d+ `. ` +m+ `, ` +y %>
+          </p>
+          <p class="limited-p card-text">Content: <%= info.content %></p>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+<% } %>

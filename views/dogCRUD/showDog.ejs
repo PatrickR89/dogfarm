@@ -1,0 +1,158 @@
+<% layout ('layout/boilerplate') %> <% var monthNames = [ 'January', 'February',
+'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+'November', 'December' ]; var d = dog.dateOfBirth.getDate(); var m =
+monthNames[dog.dateOfBirth.getMonth()]; var y = dog.dateOfBirth.getFullYear();
+%>
+
+<div class="row">
+  <div class="col-8 offset-2">
+    <h1><%= dog.name %></h1>
+    <div class="card mb-3 show-div" style="width: 100%">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <% if (dog.images.length) { %>
+          <img
+            class="img-fluid m-1"
+            src="<%= dog.images[0].url %>"
+            style="min-height: 200px"
+            alt="..."
+          />
+          <% } else { %>
+          <img
+            class="img-fluid"
+            src="https://res.cloudinary.com/dm85zedll/image/upload/v1624647772/DogFarm/kavrytmozb7l9l7uhjch.jpg"
+            alt="..."
+          />
+          <% } %>
+        </div>
+        <div class="col-md-8 show-div">
+          <div class="card-body">
+            <h5 class="card-title"><%= dog.name %></h5>
+            <p class="card-text text-muted">
+              Date of birth: <%= d+ ` ` +m+ ` ` +y %>
+            </p>
+
+            <p class="card-text">Age: <%= `${age} ${year}` %></p>
+            <p class="card-text">
+              Parents: <% if (fatherId == undefined) {%> <%= dog.parent1 %> <% }
+              else { %>
+              <a href="/dogs/<%= fatherId %>" class="a-index"
+                ><%= dog.parent1 %></a
+              >
+              <% } %> and <% if (motherId == undefined) {%> <%= dog.parent2 %>
+              <% } else { %>
+              <a href="/dogs/<%= motherId %>" class="a-index"
+                ><%= dog.parent2 %></a
+              >
+              <% } %>
+            </p>
+            <% for (competition of competitions) {%> <% if (dog.name ==
+            competition.dog) {%>
+            <p class="card-text">
+              Attended competition:
+              <a href="/competitions" class="a-index">
+                <%= competition.name %></a
+              >
+              with <%= competition.award %> award earned.
+            </p>
+            <% } %> <% } %>
+            <p class="card-text">
+              <small class="text-muted">Status: </small>
+              <% if (dog.status == 'Deceased' && dog.yearOfDeath >
+              dog.dateOfBirth.getFullYear() && dog.yearOfDeath < currentYear)
+              {%>
+              <small class="card-text" id="dogstat" name="<%= dog.status %>"
+                ><%= dog.status %> in <%= dog.yearOfDeath %>.
+              </small>
+              <% } else {%>
+              <small class="card-text" id="dogstat" name="<%= dog.status %>"
+                ><%= dog.status %>
+              </small>
+              <% } %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3 show-div" style="width: 100%">
+      <div class="card-body">
+        <h5 class="card-title">Description</h5>
+        <p class="card-text"><%= dog.description %></p>
+      </div>
+    </div>
+
+    <% if(currentUser) { %>
+    <div style="text-align: center">
+      <form
+        action="/dogs"
+        method="GET"
+        style="justify-content: center; display: inline"
+      >
+        <button
+          class="btn index-btn btn-sm mb-3"
+          style="width: 32%; justify-content: center; margin: auto"
+        >
+          INDEX
+        </button>
+      </form>
+      <form
+        action="/dogs/<%= dog._id %>/edit"
+        method="GET"
+        style="justify-content: center; display: inline"
+      >
+        <button
+          class="btn admin-btn btn-sm mb-3"
+          style="width: 32%; justify-content: center; margin: auto"
+        >
+          EDIT
+        </button>
+      </form>
+      <form
+        action="/dogs/<%= dog._id %>?_method=DELETE"
+        method="POST"
+        style="justify-content: center; display: inline"
+      >
+        <button
+          class="btn admin-btn btn-sm mb-3"
+          style="width: 32%; justify-content: center; margin: auto"
+        >
+          DELETE
+        </button>
+      </form>
+    </div>
+    <% } else { %>
+    <form
+      action="/dogs"
+      method="GET"
+      style="justify-content: center; display: inline"
+    >
+      <button
+        class="btn index-btn btn-sm mb-3"
+        style="width: 100%; justify-content: center"
+      >
+        INDEX
+      </button>
+    </form>
+    <% } %> <% if (dog.images.length) { %>
+    <div class="card mb-3 gallery-div" style="width: 100%">
+      <h4 class="card-title mt-3 mx-3">Gallery</h4>
+      <div class="row">
+        <div class="col ms-3 mb-3">
+          <% for (let image of dog.images) { %>
+          <a href="<%= image.url %>" class="a-index">
+            <img
+              src="<%= image.thumbnail %>"
+              class="img-fluid rounded gallery-thumb"
+              alt=""
+            />
+          </a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<script src="/javascripts/dogStatus.js"></script>

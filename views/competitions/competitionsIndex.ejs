@@ -1,0 +1,83 @@
+<% layout ('layout/boilerplate') %> 
+
+<h1>Competitions</h1>
+
+
+
+<% for (let competition of competitions.reverse()) { %>
+
+    <%  var monthNames = [
+      'January', 'February', 'March',
+      'April', 'May', 'June', 'July',
+      'August', 'September', 'October',
+      'November', 'December'
+   ];
+    var ds = competition.startDate.getDate();
+     var ms = monthNames[ competition.startDate.getMonth()];
+     var ys =  competition.startDate.getFullYear();
+   
+     var de =  competition.endDate.getDate();
+     var me = monthNames[ competition.endDate.getMonth()];
+     var ye =  competition.endDate.getFullYear();
+     %> 
+
+    <div class="card mb-3 index-nozoom-div">
+        <div class="row g-0">
+          <div class="col-md-2" style="display: flex; justify-content: center">
+            
+                <% if (competition.images.length) { %>
+                <div id="competitionCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <% competition.images.forEach((img, i)=> {%>
+                            <div class="carousel-item <%= i === 0 ? 'active' : ''%> " style="height: 30rem;">
+                                <img src="<%= img.url %>" class="d-block w-100" style="height: 100%; width: 100%; object-fit: contain;" alt="...">
+                            </div>
+                            <% }) %>
+                    </div>
+                    <% if(competition.images.length > 1) {%>
+
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#competitionCarousel" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#competitionCarousel" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                    <% } %>
+                  </div>
+            </div>
+            <% } else { %>
+                <img class="img-fluid" src="https://res.cloudinary.com/dm85zedll/image/upload/v1624647772/DogFarm/kavrytmozb7l9l7uhjch.jpg" alt="...">
+            <% } %> 
+        
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h4 class="card-title index-title">  <%= competition.name %></h4>
+              <p class="card-text text-muted"> Duration: <%= ds+ ` ` +ms+ ` ` +ys %> until <%= de+ ` ` +me+ ` ` +ye %> </p>
+              <p class="card-text">Location: <%= competition.location %> </p>
+              <p class="card-text">Our competitior: <%= competition.dog %> </p>
+              <p class="card-text">Award: <%= competition.award %> </p>
+              <% if(currentUser) { %>
+                <div>
+                  
+              <form action="/competitions/<%= competition._id %>/edit" method="GET">
+                <button class="btn admin-btn btn-sm mb-3"
+                style="width: 33%; justify-content: center">Edit <%= competition.name %></button>
+              </form>
+           
+           
+              <form action="/competitions/<%= competition._id %>?_method=DELETE" method="POST" style="justify-content: center; display: inline;">
+                <button class="btn admin-btn btn-sm mb-3"
+                style="width: 33%; justify-content: center">Delete</button>
+            </form>
+          
+          </div>
+            <% } %> 
+            </div>
+          </div>
+        </div>
+      </div>
+<% } %>  
