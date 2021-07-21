@@ -5,7 +5,7 @@ const upload = multer({ storage });
 
 const catchAsync = require("../utils/catchAsync");
 const aboutUs = require("../controllers/aboutUsCRUD");
-const { validateAboutUs } = require("../middleware");
+const { validateAboutUs, loggedIn } = require("../middleware");
 
 const router = express.Router();
 
@@ -15,6 +15,7 @@ router
   .route("/aboutus/:id")
   .put(
     upload.array("images"),
+    loggedIn,
     validateAboutUs,
     catchAsync(aboutUs.editAboutUs)
   );

@@ -2,7 +2,7 @@ const express = require("express");
 
 const catchAsync = require("../utils/catchAsync");
 const contact = require("../controllers/contactCRUD");
-const { validateContact, validateMessage } = require("../middleware");
+const { validateContact, validateMessage, loggedIn } = require("../middleware");
 
 const router = express.Router();
 
@@ -13,11 +13,15 @@ router
   .get(catchAsync(contact.message))
   .post(validateMessage, catchAsync(contact.createMessage));
 
-router.delete("/contact/messages/:id", catchAsync(contact.deleteMessage));
+router.delete(
+  "/contact/messages/:id",
+  loggedIn,
+  catchAsync(contact.deleteMessage)
+);
 
 router
   .route("/contact/:id")
-  .put(validateContact, catchAsync(contact.editContact));
+  .put(loggedIn, validateContact, catchAsync(contact.editContact));
 
 router.get("/contact/:id/edit", catchAsync(contact.renderEdit));
 

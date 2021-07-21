@@ -14,7 +14,7 @@ const LocalStrategy = require("passport-local");
 const mongoSanitize = require("express-mongo-sanitize");
 const MongoDBStore = require("connect-mongo");
 
-const ExpressError = require("./utils/expressError");
+const ExpressError = require("./utils/ExpressError");
 const User = require("./models/userModel");
 
 const dogRoutes = require("./routes/dogCRUD");

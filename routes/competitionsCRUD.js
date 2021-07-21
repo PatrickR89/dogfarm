@@ -5,7 +5,7 @@ const upload = multer({ storage });
 
 const catchAsync = require("../utils/catchAsync");
 const competitions = require("../controllers/competitionsCRUD");
-const { validateCompetition } = require("../middleware");
+const { validateCompetition, loggedIn } = require("../middleware");
 
 const router = express.Router();
 
@@ -16,6 +16,7 @@ router
   .get(catchAsync(competitions.index))
   .post(
     upload.array("images"),
+    loggedIn,
     validateCompetition,
     catchAsync(competitions.createNew)
   );
@@ -24,10 +25,11 @@ router
   .route("/competitions/:id")
   .put(
     upload.array("images"),
+    loggedIn,
     validateCompetition,
     catchAsync(competitions.editCompetition)
   )
-  .delete(catchAsync(competitions.deleteCompetition));
+  .delete(loggedIn, catchAsync(competitions.deleteCompetition));
 
 router.get("/competitions/:id/edit", catchAsync(competitions.renderEdit));
 

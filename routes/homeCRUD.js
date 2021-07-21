@@ -1,19 +1,25 @@
-const express = require('express');
-const multer = require('multer')
-const { storage } = require('../cloudinary');
+const express = require("express");
+const multer = require("multer");
+const { storage } = require("../cloudinary");
 const upload = multer({ storage });
 
-const catchAsync = require('../utils/catchAsync');
-const home = require('../controllers/homeCRUD')
-const { validateHome } = require('../middleware')
+const catchAsync = require("../utils/catchAsync");
+const home = require("../controllers/homeCRUD");
+const { validateHome, loggedIn } = require("../middleware");
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/home', catchAsync(home.home))
+router.get("/home", catchAsync(home.home));
 
-router.route('/home/:id')
-    .put(upload.array('images'), validateHome, catchAsync(home.editHome))
+router
+  .route("/home/:id")
+  .put(
+    upload.array("images"),
+    loggedIn,
+    validateHome,
+    catchAsync(home.editHome)
+  );
 
-router.get('/home/:id/edit', catchAsync(home.renderEdit))
+router.get("/home/:id/edit", catchAsync(home.renderEdit));
 
 module.exports = router;
