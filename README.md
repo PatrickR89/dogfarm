@@ -11,5 +11,6 @@ To do..
   4. Connect procject with working-dog.com
   5. Adress link -> open maps in new tab
   6. Add family tree
+  7. add @media for mobile phones (/home; /dogs/:id -profile; /contact)
   
 That's it for now.
